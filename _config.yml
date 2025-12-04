@@ -1,0 +1,11 @@
+title: "FleCSI Tutorial"
+description: "Distributed, GPU-Aware, Task-Parallel Programming with FleCSI"
+
+remote_theme: just-the-docs/just-the-docs
+
+plugins:
+  - jekyll-remote-theme
+
+just_the_docs:
+  show_sidebar: false
+
