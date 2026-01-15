@@ -60,7 +60,7 @@ Davis represents LANL on the ISO C++ committee; in turn, he has worked to improv
 Davis is the current technical lead for FleCSI.
 
 ### Ben Bergen
-![Ben Bergen](assets/ben-bergen.jpg)
+![Ben Bergen](assets/ben-bergen.png)
 
 Ben Bergen is a senior scientist at LANL with a focus on applied mathematics, programming abstractions, and high-performance software design.
 He leads the Task-Parallel Project (TPP) that oversees FleCSI, and has contributed to a wide range of simulation codes in fluid dynamics, astrophysics, and radiation transport.
