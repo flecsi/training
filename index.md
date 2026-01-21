@@ -8,6 +8,7 @@ title: Distributed, GPU-Aware, Task-Parallel Programming with FleCSI
 </p>
 
 # Distributed, GPU-Aware, Task-Parallel Programming with FleCSI
+## Thu, January 29, 2026　13:30 - 17:00 　Room 1001
 ## LA-UR-25-26445
 
 ## Abstract
@@ -26,6 +27,15 @@ By the end of the session, participants will be equipped to create their own per
 
 FleCSI is actively used in research applications such as FleCSPH and HARD, showcasing its applicability in astrophysics, multi-physics simulations, and radiation hydrodynamics.
 Its open-source nature makes it an attractive choice for research teams building future-proof applications on emerging architectures.
+
+---
+
+## Registration
+
+To create your account on the machine and enable participation in the hands-on tutorial, please complete the registration using the link below.
+Registration for the **SCA/HPCAsia conference** is required in order to attend.
+
+[Register](https://forms.gle/j1HsnZ2X4p6N2QM5A)
 
 ---
 
@@ -122,3 +132,11 @@ Slides:
 Exercises:
 
 https://github.com/flecsi/training
+
+## Feedback
+
+We are continuously working to improve both the content and the delivery of this tutorial.
+Your feedback helps us identify what worked well and what can be improved for future sessions.
+After completing the tutorial, please take a moment to share your experience using the form below.
+
+[Submit feedback](https://forms.gle/i3DrKoacwZpJdLnq7)
