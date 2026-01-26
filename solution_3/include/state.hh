@@ -72,7 +72,7 @@ struct state {
     static inline const flecsi::field<double>::definition<mesh> u, rhs;
     static inline const flecsi::field<progress,
       flecsi::data::single>::definition<flecsi::topo::index>
-      t, step;
+      prg;
     mesh::ptr m;
     flecsi::topo::index::ptr idx;
   } cur;
