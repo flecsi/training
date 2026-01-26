@@ -4,11 +4,8 @@
 namespace heat {
 
 void
-analyse(spec::control_policy &cp) {
+analyze(spec::control_policy &cp) {
   auto &s = cp.state();
-
-  // Replace with predicated task
-  // if(s.c.step % s.p.output_every == 0)
 
   static int count = 0;
   if(++count % s.par.output_every == 0)
@@ -17,4 +14,4 @@ analyse(spec::control_policy &cp) {
 
 } // namespace heat
 
-inline control::action<heat::analyse, spec::cp::analyze> analyze_action;
+inline control::action<heat::analyze, spec::cp::analyze> analyze_action;

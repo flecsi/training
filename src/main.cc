@@ -10,7 +10,7 @@ simulation(const char *f) {
   initialize(s);
   while(s.cur.prg.t < s.par.t_final) {
     advance(s);
-    analyse(s);
+    analyze(s);
   }
   finalize(s);
   return 0;

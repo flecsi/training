@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 project(heat2d LANGUAGES CXX C)
 
 # ---- Option to build "version 4" (no physics/io, no link) ----
-option(VERSION4 "Build VERSION4: compile sources except physics.cc/io.cc, no executable" OFF)
+option(VERSION3 "Build VERSION3: compile sources except physics.cc/io.cc, no executable" OFF)
 
 # ---- Code formatting (clang-format) ----
 include("${CMAKE_SOURCE_DIR}/format.cmake")
@@ -33,8 +33,8 @@ set(HEAT2D_SOURCES
 # ---- FleCSI package ----
 find_package(FleCSI REQUIRED)
 
-# ---- VERSION4: only compile (no physics.cc/io.cc, no link) ----
-if (VERSION4)
+# ---- VERSION3: only compile (no physics.cc/io.cc, no link) ----
+if (VERSION3)
 
     # Build them as an object library so they are compiled but not linked
     add_library(heat2d_objs OBJECT main.cc)
