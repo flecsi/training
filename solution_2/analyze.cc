@@ -12,4 +12,4 @@ analyze(spec::control_policy &cp) {
 
 } // namespace heat
 
-inline control::action<heat::analyze, spec::cp::analyze> analyze_action;
+const control::action<heat::analyze, spec::cp::analyze> analyze_action;

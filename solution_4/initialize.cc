@@ -22,5 +22,4 @@ initialize(spec::control_policy &cp) {
 
 } // namespace heat
 
-inline control::action<heat::initialize, spec::cp::initialize>
-  initialize_action;
+const control::action<heat::initialize, spec::cp::initialize> initialize_action;
