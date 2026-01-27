@@ -6,6 +6,7 @@ Generate PNG frames from heat2d CSV snapshots.
 import glob
 import os
 import numpy as np
+import sys
 
 import matplotlib
 matplotlib.use("Agg")
@@ -20,20 +21,20 @@ def load_snapshot(path):
     return x, y, U
 
 def save_frames():
-    pattern = "u_*.csv"
 
     paths = sorted(glob.glob("u_*.csv"))
     if not paths:
         print("No CSV snapshots found.", file=sys.stderr)
         return
 
+    outdir = "frames"
     os.makedirs(outdir, exist_ok=True)
-
-    fig, ax = plt.subplots()
 
     for path in paths:
         step = os.path.splitext(path)[0]
         x, y, U = load_snapshot(path)
+
+        fig, ax = plt.subplots()
 
         im = ax.imshow(
             U,
@@ -47,8 +48,8 @@ def save_frames():
         ax.set_title(step)
 
         fig.savefig(os.path.join(outdir, f"{step}.png"), dpi=150, bbox_inches="tight")
-        fig.clf()
-
+        plt.close(fig)
 
 if __name__ == "__main__":
     save_frames()
+
