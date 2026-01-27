@@ -5,7 +5,7 @@
 
 namespace heat::physics {
 
-struct red_error {
+struct pair_sum {
   using pair = std::pair<double, double>;
   static pair combine(pair p1, pair p2) {
     p1.first += p2.first;

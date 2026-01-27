@@ -13,7 +13,7 @@ finalize(spec::control_policy &cp) {
   auto &sc = cp.scheduler();
 
   auto err =
-    sc.reduce<physics::compute_error, physics::red_error>(flecsi::exec::on,
+    sc.reduce<physics::compute_error, physics::pair_sum>(flecsi::exec::on,
         *s.cur.m,
         s.cur.u(*s.cur.m),
         s.cur.rhs(*s.cur.m),

@@ -104,7 +104,7 @@ compute_error(flecsi::exec::accelerator s,
 
   return s.executor()
     .named("compute_error")
-    .template reduce<red_error, std::pair<double, double>>(
+    .template reduce<pair_sum, std::pair<double, double>>(
       m.axis<mesh::y_axis>().layout.logical(),
       FLECSI_LAMBDA(auto j, auto err_ref) {
         const double y = m.value<mesh::y_axis>(j);
