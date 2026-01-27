@@ -67,7 +67,7 @@ struct mesh : flecsi::topo::specialization<flecsi::topo::narray, mesh> {
       return red<A>(row + 1);
     }
 
-    void set_geometry(double x, double y) { // available if writable
+    void set_geometry(double x, double y) const {
       this->policy_meta() = {x, y};
     }
 
