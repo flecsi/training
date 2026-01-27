@@ -6,7 +6,7 @@ endif()
 
 project(heat2d LANGUAGES CXX C)
 
-# ---- Option to build "version 4" (no physics/io, no link) ----
+# ---- Option to build "version 3" (no physics/io, no link) ----
 option(VERSION3 "Build VERSION3: compile sources except physics.cc/io.cc, no executable" OFF)
 
 # ---- Code formatting (clang-format) ----
