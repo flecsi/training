@@ -7,8 +7,6 @@
 
 namespace heat {
 
-struct params {};
-
 struct mesh {
   int Nx, Ny;
   double Lx, Ly;

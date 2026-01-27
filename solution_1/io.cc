@@ -1,6 +1,5 @@
 #include "include/io.hh"
 #include <algorithm>
-#include <flecsi/execution.hh>
 #include <flecsi/flog.hh>
 #include <fstream>
 #include <iomanip>

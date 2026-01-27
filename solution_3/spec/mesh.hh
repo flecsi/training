@@ -5,8 +5,6 @@
 #include <flecsi/execution.hh>
 #include <flecsi/flog.hh>
 
-#define VERSION_4
-
 namespace heat {
 
 struct mesh : flecsi::topo::specialization<flecsi::topo::narray, mesh> {
