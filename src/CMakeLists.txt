@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
 
+if(POLICY CMP0144)
+  cmake_policy(SET CMP0144 NEW)
+endif()
+
 project(heat2d LANGUAGES CXX C)
 
 # ---- Option to build "version 4" (no physics/io, no link) ----
@@ -35,6 +39,7 @@ if (VERSION3)
     # Build them as an object library so they are compiled but not linked
     add_library(heat2d_objs OBJECT main.cc)
     target_link_libraries(heat2d_objs PRIVATE heatcore)
+    target_compile_definitions(heat2d_objs PRIVATE VERSION3)
 
 else()
     # ---- Executable (normal build) ----
