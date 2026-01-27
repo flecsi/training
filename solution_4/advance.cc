@@ -1,11 +1,10 @@
-#include "include/heat.hh"
 #include "include/physics.hh"
+#include "spec/control.hh"
 
 namespace heat {
 
-bool
-check_loop(flecsi::exec::cpu,
-  flecsi::future<double> mr,
+static bool
+check_loop(flecsi::future<double> mr,
   flecsi::future<double> mb,
   flecsi::future<double> res,
   const state::params &p) noexcept {
@@ -13,7 +12,7 @@ check_loop(flecsi::exec::cpu,
            (res.get() < p.residue_tol));
 }
 
-void
+static void
 advance(spec::control_policy &cp) {
 
   using namespace physics;

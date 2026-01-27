@@ -1,8 +1,6 @@
-#include "include/heat.hh"
 #include "include/io.hh"
+#include "spec/control.hh"
 #include <flecsi/runtime.hh>
-
-using namespace heat;
 
 int
 main() {

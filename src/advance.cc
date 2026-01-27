@@ -3,7 +3,7 @@
 
 namespace heat {
 
-bool
+static bool
 check_loop(const state &s, double mr, double mb, double res) {
   return !(
     (std::max(mb, mr) < s.par.implicit_tol) && (res < s.par.residue_tol));

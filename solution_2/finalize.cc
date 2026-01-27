@@ -1,6 +1,6 @@
-#include "include/heat.hh"
 #include "include/io.hh"
 #include "include/physics.hh"
+#include "spec/control.hh"
 #include <flecsi/flog.hh>
 #include <iostream>
 

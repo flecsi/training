@@ -1,1 +1,62 @@
-../../solution_2/spec/control.hh
+#ifndef SPEC_CONTROL_HH
+#define SPEC_CONTROL_HH
+
+#include "include/io.hh"
+#include <flecsi/execution.hh>
+#include <flecsi/flog.hh>
+#include <flecsi/run/control.hh>
+
+#include <fstream>
+
+namespace spec {
+
+/// Control Points.
+enum class cp { initialize, advance, analyze, finalize };
+
+inline const char *
+operator*(cp control_point) {
+  switch(control_point) {
+    case cp::initialize:
+      return "initialize";
+    case cp::advance:
+      return "advance";
+    case cp::analyze:
+      return "analyze";
+    case cp::finalize:
+      return "finalize";
+  }
+  flog_fatal("invalid control point");
+}
+
+struct control_policy : flecsi::run::control_base {
+
+  using control_points_enum = cp;
+
+  control_policy(const char *c) : state_(heat::io::read_file(c)) {}
+
+  heat::state &state() {
+    return state_;
+  }
+
+  static bool cycle_control(control_policy &cp) {
+#ifndef VERSION3
+    auto &s = cp.state();
+    s.cur.prg.t += s.par.dt;
+    s.cur.prg.step += 1;
+    return s.cur.prg.t < s.par.t_final;
+#endif
+  }
+
+  using control_points = list<point<cp::initialize>,
+    cycle<cycle_control, point<cp::advance>, point<cp::analyze>>,
+    point<cp::finalize>>;
+
+private:
+  heat::state state_;
+}; // struct control_policy
+
+} // namespace spec
+
+using control = flecsi::run::control<spec::control_policy>;
+
+#endif // CONTROL_HH

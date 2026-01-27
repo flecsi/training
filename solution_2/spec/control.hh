@@ -38,7 +38,12 @@ struct control_policy : flecsi::run::control_base {
     return state_;
   }
 
-  static bool cycle_control(control_policy &cp);
+  static bool cycle_control(control_policy &cp) {
+    auto &s = cp.state();
+    s.cur.prg.t += s.par.dt;
+    s.cur.prg.step += 1;
+    return s.cur.prg.t < s.par.t_final;
+  }
 
   using control_points = list<point<cp::initialize>,
     cycle<cycle_control, point<cp::advance>, point<cp::analyze>>,

@@ -38,7 +38,12 @@ struct control_policy : flecsi::run::control_base {
     return state_;
   }
 
-  static bool cycle_control(control_policy &cp);
+  static bool cycle_control(control_policy &cp) {
+    auto &s = cp.state();
+    auto &sc = cp.scheduler();
+    auto t = sc.execute<update_dt>(s.cur.prg(*s.cur.idx), s.par);
+    return t.all()[0] < s.par.t_final;
+  }
 
   static inline double update_dt(
     flecsi::field<heat::state::current::progress,

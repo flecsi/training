@@ -1,9 +1,9 @@
-#include "include/heat.hh"
 #include "include/io.hh"
+#include "spec/control.hh"
 
 namespace heat {
 
-void
+static void
 analyze(spec::control_policy &cp) {
   const auto &s = cp.state();
   if(s.cur.prg.step % s.par.output_every == 0)
