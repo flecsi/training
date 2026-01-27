@@ -5,6 +5,17 @@
 
 namespace heat::physics {
 
+struct red_error {
+  using pair = std::pair<double, double>;
+  static pair combine(pair p1, pair p2) {
+    p1.first += p2.first;
+    p1.second += p2.second;
+    return p1;
+  }
+  template<typename>
+  static constexpr pair identity = std::make_pair(0, 0);
+};
+
 void initialize(flecsi::exec::accelerator,
   mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::wo, flecsi::na> u_a,

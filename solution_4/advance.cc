@@ -19,14 +19,10 @@ advance(spec::control_policy &cp) {
   auto &s = cp.state();
   auto &sc = cp.scheduler();
 
-  sc.execute<physics::apply_dirichlet>(flecsi::exec::on,
-    *s.cur.m,
-    s.cur.u(*s.cur.m),
-    s.cur.prg(*s.cur.idx),
-    s.par.b);
+  sc.execute<physics::apply_dirichlet>(
+    *s.cur.m, s.cur.u(*s.cur.m), s.cur.prg(*s.cur.idx), s.par.b);
 
-  sc.execute<physics::initialize_rhs>(flecsi::exec::on,
-    *s.cur.m,
+  sc.execute<physics::initialize_rhs>(*s.cur.m,
     s.cur.rhs(*s.cur.m),
     s.cur.u(*s.cur.m),
     s.cur.prg(*s.cur.idx),
@@ -37,40 +33,20 @@ advance(spec::control_policy &cp) {
   do {
 
     mr = sc.reduce<physics::red_black<true>, flecsi::exec::fold::sum>(
-      flecsi::exec::on,
-      *s.cur.m,
-      s.cur.u(*s.cur.m),
-      s.cur.rhs(*s.cur.m),
-      s.par);
-    sc.execute<physics::apply_dirichlet>(flecsi::exec::on,
-      *s.cur.m,
-      s.cur.u(*s.cur.m),
-      s.cur.prg(*s.cur.idx),
-      s.par.b);
+      *s.cur.m, s.cur.u(*s.cur.m), s.cur.rhs(*s.cur.m), s.par);
+    sc.execute<physics::apply_dirichlet>(
+      *s.cur.m, s.cur.u(*s.cur.m), s.cur.prg(*s.cur.idx), s.par.b);
 
     mb = sc.reduce<physics::red_black<false>, flecsi::exec::fold::sum>(
-      flecsi::exec::on,
-      *s.cur.m,
-      s.cur.u(*s.cur.m),
-      s.cur.rhs(*s.cur.m),
-      s.par);
-    sc.execute<physics::apply_dirichlet>(flecsi::exec::on,
-      *s.cur.m,
-      s.cur.u(*s.cur.m),
-      s.cur.prg(*s.cur.idx),
-      s.par.b);
+      *s.cur.m, s.cur.u(*s.cur.m), s.cur.rhs(*s.cur.m), s.par);
+    sc.execute<physics::apply_dirichlet>(
+      *s.cur.m, s.cur.u(*s.cur.m), s.cur.prg(*s.cur.idx), s.par.b);
 
-    res =
-      sc.reduce<physics::residual, flecsi::exec::fold::max>(flecsi::exec::on,
-        *s.cur.m,
-        s.cur.u(*s.cur.m),
-        s.cur.rhs(*s.cur.m),
-        s.par);
+    res = sc.reduce<physics::residual, flecsi::exec::fold::max>(
+      *s.cur.m, s.cur.u(*s.cur.m), s.cur.rhs(*s.cur.m), s.par);
 
   } while(
-    sc.reduce<check_loop, flecsi::exec::fold::sum>(
-        flecsi::exec::on, mr, mb, res, s.par)
-      .get());
+    sc.reduce<check_loop, flecsi::exec::fold::sum>(mr, mb, res, s.par).get());
 }
 
 } // namespace heat

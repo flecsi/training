@@ -88,17 +88,6 @@ analytical_gaussian(double x,
   return (1.0 / denom) * std::exp(exponent);
 }
 
-struct pairmax {
-  using pair = std::pair<double, double>;
-  static pair combine(pair p1, pair p2) {
-    return std::make_pair(
-      std::max(p1.first, p2.first), std::max(p1.second, p2.second));
-  }
-  template<typename>
-  static constexpr pair identity{-std::numeric_limits<double>::infinity(),
-    -std::numeric_limits<double>::infinity()};
-};
-
 std::pair<double, double>
 compute_error(flecsi::exec::accelerator s,
   mesh::accessor<flecsi::ro> m,
@@ -115,7 +104,7 @@ compute_error(flecsi::exec::accelerator s,
 
   return s.executor()
     .named("compute_error")
-    .template reduce<pairmax, std::pair<double, double>>(
+    .template reduce<red_error, std::pair<double, double>>(
       m.axis<mesh::y_axis>().layout.logical(),
       FLECSI_LAMBDA(auto j, auto err_ref) {
         const double y = m.value<mesh::y_axis>(j);
