@@ -10,7 +10,7 @@ initialize(mesh::accessor<flecsi::ro> m,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::wo> prg_a,
   const gaussianIC &ic) noexcept {
-  *prg_a = {0., 0};
+  prg_a = {0., 0};
   auto u = m.mdspan<mesh::vertices>(u_a);
   for(auto j : m.axis<mesh::y_axis>().layout.logical()) {
     const double y = m.value<mesh::y_axis>(j);

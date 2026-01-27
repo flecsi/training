@@ -11,7 +11,7 @@ initialize(flecsi::exec::accelerator s,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::wo> prg_a,
   const gaussianIC &ic) noexcept {
-  *prg_a = {0., 0};
+  prg_a = {0., 0};
   auto u = m.mdspan<mesh::vertices>(u_a);
   s.executor()
     .named("initialize")
