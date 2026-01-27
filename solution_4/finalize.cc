@@ -32,7 +32,6 @@ finalize(spec::control_policy &cp) {
                .get();
   flog(info) << "final relative L2 error=" << std::sqrt(err.first / err.second)
              << std::endl;
-  flecsi::flog::flush();
   io::output_print(s, sc, "u_");
 }
 

@@ -1,5 +1,6 @@
 #include "include/io.hh"
 #include <algorithm>
+#include <flecsi/execution.hh>
 #include <flecsi/flog.hh>
 #include <fstream>
 #include <iomanip>
@@ -60,7 +61,6 @@ print_diag(flecsi::exec::cpu,
 
   flog(info) << "  step " << prg_a->step << "  t=" << std::fixed
              << std::setprecision(6) << prg_a->t << '\n';
-  flecsi::flog::flush();
 
   return std::make_pair(umin, umax);
 }
@@ -79,7 +79,6 @@ output_print(state &s, flecsi::scheduler &sc, std::string prefix) {
 
   flog(info) << "  u[min,max]=[" << std::setprecision(6) << uminmax.first
              << ", " << uminmax.second << "]" << '\n';
-  flecsi::flog::flush();
 }
 
 } // namespace heat::io

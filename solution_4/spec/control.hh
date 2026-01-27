@@ -51,11 +51,6 @@ struct control_policy : flecsi::run::control_base {
     const heat::state::params &p) noexcept {
     prg_a->t += p.dt;
     prg_a->step += 1;
-    if(prg_a->t >= p.t_final) {
-      flog(info) << "step: " << prg_a->step << " time: " << prg_a->t
-                 << " dt: " << p.dt << std::endl;
-      flecsi::flog::flush();
-    } // if
     return prg_a->t;
   }
 
