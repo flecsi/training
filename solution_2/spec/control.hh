@@ -39,7 +39,9 @@ struct control_policy : flecsi::run::control_base {
   }
 
   static bool cycle_control(control_policy &cp) {
-#ifndef VERSION3
+#ifdef VERSION3
+    return false;
+#else
     auto &s = cp.state();
     s.cur.prg.t += s.par.dt;
     s.cur.prg.step += 1;
