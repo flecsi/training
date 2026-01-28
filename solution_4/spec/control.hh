@@ -10,6 +10,8 @@
 
 namespace spec {
 
+bool cycle_check(heat::state &, flecsi::scheduler &s);
+
 /// Control Points.
 enum class cp { initialize, advance, analyze, finalize };
 
@@ -39,11 +41,7 @@ struct control_policy : flecsi::run::control_base {
   }
 
   static bool cycle_control(control_policy &cp) {
-    auto &s = cp.state();
-    auto &sc = cp.scheduler();
-    return sc
-      .reduce<update_dt, flecsi::exec::fold::sum>(s.cur.prg(*s.cur.idx), s.par)
-      .get();
+    return cycle_check(cp.state(), cp.scheduler());
   }
 
   static inline bool update_dt(

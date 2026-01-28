@@ -8,7 +8,7 @@ simulation(const char *f) {
   state s(io::read_file(f));
 
   initialize(s);
-  while(s.cur.prg.t < s.par.t_final) {
+  while(cycle_check(s)) {
     advance(s);
     analyze(s);
   }

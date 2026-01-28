@@ -1,6 +1,13 @@
 #include "include/physics.hh"
 #include "spec/control.hh"
 
+bool
+spec::cycle_check(heat::state &s) {
+  s.cur.prg.t += s.par.dt;
+  s.cur.prg.step += 1;
+  return s.cur.prg.t < s.par.t_final;
+}
+
 namespace heat {
 
 static bool

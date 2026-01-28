@@ -10,6 +10,8 @@
 
 namespace spec {
 
+bool cycle_check(heat::state &s);
+
 /// Control Points.
 enum class cp { initialize, advance, analyze, finalize };
 
@@ -39,11 +41,7 @@ struct control_policy : flecsi::run::control_base {
   }
 
   static bool cycle_control(control_policy &cp) {
-#ifdef VERSION3
-    return false;
-#else
-    // edit here
-#endif
+    return cycle_check(cp.state());
   }
 
   using control_points = list<point<cp::initialize>,

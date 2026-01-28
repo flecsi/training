@@ -1,6 +1,14 @@
 #include "include/physics.hh"
 #include "spec/control.hh"
 
+bool
+spec::cycle_check(heat::state &s, flecsi::scheduler &sc) {
+  return sc
+    .reduce<spec::control_policy::update_dt, flecsi::exec::fold::sum>(
+      s.cur.prg(*s.cur.idx), s.par)
+    .get();
+}
+
 namespace heat {
 
 static bool
