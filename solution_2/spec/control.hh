@@ -55,8 +55,8 @@ private:
   heat::state state_;
 }; // struct control_policy
 
-} // namespace spec
-
 using control = flecsi::run::control<spec::control_policy>;
+
+} // namespace spec
 
 #endif // CONTROL_HH

@@ -27,4 +27,4 @@ finalize(spec::control_policy &cp) {
 
 } // namespace heat
 
-const control::action<heat::finalize, spec::cp::finalize> finalize_action;
+const spec::control::action<heat::finalize, spec::cp::finalize> finalize_action;

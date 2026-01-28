@@ -73,4 +73,4 @@ advance(spec::control_policy &cp) {
 
 } // namespace heat
 
-const control::action<heat::advance, spec::cp::advance> advance_action;
+const spec::control::action<heat::advance, spec::cp::advance> advance_action;
