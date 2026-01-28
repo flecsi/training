@@ -5,8 +5,6 @@
 #include <flecsi/execution.hh>
 #include <flecsi/flog.hh>
 
-#define VERSION_4
-
 namespace heat {
 
 struct mesh : flecsi::topo::specialization<flecsi::topo::narray, mesh> {
@@ -69,7 +67,7 @@ struct mesh : flecsi::topo::specialization<flecsi::topo::narray, mesh> {
       return red<A>(row + 1);
     }
 
-    void set_geometry(double x, double y) { // available if writable
+    void set_geometry(double x, double y) const { // available if writable
       this->policy_meta() = {x, y};
     }
 

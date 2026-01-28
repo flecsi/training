@@ -7,13 +7,11 @@
 
 namespace heat {
 
-struct params {};
-
 struct mesh {
-  int Nx, Ny;
+  std::size_t Nx, Ny;
   double Lx, Ly;
 
-  explicit mesh(int Nx, int Ny, double Lx, double Ly)
+  explicit mesh(std::size_t Nx, std::size_t Ny, double Lx, double Ly)
     : Nx(Nx), Ny(Ny), Lx(Lx), Ly(Ly) {}
 
   inline std::size_t idx(int i, int j) const {
@@ -66,7 +64,7 @@ struct state {
     double residue_tol = 1e-8;
     double jacobi_omega = 0.8;
     double Lx = 1.0, Ly = 1.0;
-    int Nx = 101, Ny = 101;
+    std::size_t Nx = 101, Ny = 101;
     boundary b{0.0, 0.0, 0.0, 0.0};
     zeroSource s;
     double dx() const {
@@ -87,7 +85,8 @@ struct state {
     std::vector<double> rhs;
     mesh m;
 
-    current(int Nx, int Ny, double Lx, double Ly) : m(Nx, Ny, Lx, Ly) {}
+    current(std::size_t Nx, std::size_t Ny, double Lx, double Ly)
+      : m(Nx, Ny, Lx, Ly) {}
   } cur;
 
   explicit state(params par) : par(par), cur(par.Nx, par.Ny, par.Lx, par.Ly) {}
@@ -95,7 +94,7 @@ struct state {
 
 inline void
 allocate(state &s) {
-  const std::size_t N = static_cast<std::size_t>(s.cur.m.Nx * s.cur.m.Ny);
+  const std::size_t N = s.cur.m.Nx * s.cur.m.Ny;
   // We do not rely on the initialization to 0
   s.cur.u.resize(N);
   s.cur.rhs.resize(N);

@@ -53,7 +53,7 @@ struct state {
     double residue_tol = 1e-8;
     double jacobi_omega = 0.8;
     double Lx = 1.0, Ly = 1.0;
-    int Nx = 101, Ny = 101;
+    std::size_t Nx = 101, Ny = 101;
     boundary b{0.0, 0.0, 0.0, 0.0};
     zeroSource s;
     double dx() const {
@@ -84,13 +84,8 @@ inline void
 allocate(state &s, flecsi::scheduler &sc) {
   sc.allocate(s.cur.idx, sc.runtime().processes());
 
-  mesh::gcoord axis_extents{
-    static_cast<std::size_t>(s.par.Nx), static_cast<std::size_t>(s.par.Ny)};
-  mesh::grect geometry;
-  geometry[0][0] = 0.0;
-  geometry[0][1] = s.par.Lx;
-  geometry[1][0] = 0.0;
-  geometry[1][1] = s.par.Ly;
+  mesh::gcoord axis_extents{s.par.Nx, s.par.Ny};
+  mesh::grect geometry = {{{0., s.par.Lx}, {0.0, s.par.Ly}}};
   sc.allocate(s.cur.m,
     mesh::mpi_coloring(sc, sc.runtime().processes(), axis_extents),
     geometry);

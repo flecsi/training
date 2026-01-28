@@ -1,8 +1,12 @@
 cmake_minimum_required(VERSION 3.16)
 
+if(POLICY CMP0144)
+  cmake_policy(SET CMP0144 NEW)
+endif()
+
 project(heat2d LANGUAGES CXX C)
 
-# ---- Option to build "version 4" (no physics/io, no link) ----
+# ---- Option to build "version 3" (no physics/io, no link) ----
 option(VERSION3 "Build VERSION3: compile sources except physics.cc/io.cc, no executable" OFF)
 
 # ---- Code formatting (clang-format) ----

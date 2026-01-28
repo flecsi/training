@@ -1,15 +1,22 @@
-#include "include/heat.hh"
 #include "include/physics.hh"
+#include "spec/control.hh"
+
+bool
+spec::cycle_check(heat::state &s) {
+  s.cur.prg.t += s.par.dt;
+  s.cur.prg.step += 1;
+  return s.cur.prg.t < s.par.t_final;
+}
 
 namespace heat {
 
-bool
+static bool
 check_loop(const state &s, double mr, double mb, double res) {
   return !(
     (std::max(mb, mr) < s.par.implicit_tol) && (res < s.par.residue_tol));
 }
 
-void
+static void
 advance(spec::control_policy &cp) {
 
   using namespace physics;
@@ -35,4 +42,4 @@ advance(spec::control_policy &cp) {
 
 } // namespace heat
 
-inline control::action<heat::advance, spec::cp::advance> advance_action;
+const spec::control::action<heat::advance, spec::cp::advance> advance_action;

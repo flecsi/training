@@ -50,8 +50,7 @@ struct minmax {
 };
 
 std::pair<double, double>
-print_diag(flecsi::exec::cpu,
-  flecsi::field<double>::accessor<flecsi::ro, flecsi::na> u_a,
+print_diag(flecsi::field<double>::accessor<flecsi::ro, flecsi::na> u_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::ro> prg_a) noexcept {
 
@@ -61,7 +60,6 @@ print_diag(flecsi::exec::cpu,
 
   flog(info) << "  step " << prg_a->step << "  t=" << std::fixed
              << std::setprecision(6) << prg_a->t << '\n';
-  flecsi::flog::flush();
 
   return std::make_pair(umin, umax);
 }
@@ -74,13 +72,12 @@ output_print(state &s, flecsi::scheduler &sc, std::string prefix) {
     s.cur.u(*s.cur.m),
     s.cur.prg(*s.cur.idx),
     prefix);
-  auto uminmax = sc.reduce<print_diag, minmax>(
-                     flecsi::exec::on, s.cur.u(*s.cur.m), s.cur.prg(*s.cur.idx))
-                   .get();
+  auto uminmax =
+    sc.reduce<print_diag, minmax>(s.cur.u(*s.cur.m), s.cur.prg(*s.cur.idx))
+      .get();
 
   flog(info) << "  u[min,max]=[" << std::setprecision(6) << uminmax.first
              << ", " << uminmax.second << "]" << '\n';
-  flecsi::flog::flush();
 }
 
 } // namespace heat::io

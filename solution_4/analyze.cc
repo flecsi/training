@@ -1,9 +1,9 @@
-#include "include/heat.hh"
 #include "include/io.hh"
+#include "spec/control.hh"
 
 namespace heat {
 
-void
+static void
 analyze(spec::control_policy &cp) {
   auto &s = cp.state();
 
@@ -14,4 +14,4 @@ analyze(spec::control_policy &cp) {
 
 } // namespace heat
 
-inline control::action<heat::analyze, spec::cp::analyze> analyze_action;
+const spec::control::action<heat::analyze, spec::cp::analyze> analyze_action;

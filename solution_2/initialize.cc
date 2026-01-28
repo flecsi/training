@@ -1,10 +1,10 @@
-#include "include/heat.hh"
 #include "include/io.hh"
 #include "include/physics.hh"
+#include "spec/control.hh"
 
 namespace heat {
 
-void
+static void
 initialize(spec::control_policy &cp) {
 
   auto &s = cp.state();
@@ -18,5 +18,5 @@ initialize(spec::control_policy &cp) {
 
 } // namespace heat
 
-inline control::action<heat::initialize, spec::cp::initialize>
+const spec::control::action<heat::initialize, spec::cp::initialize>
   initialize_action;

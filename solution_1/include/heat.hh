@@ -11,6 +11,8 @@ void advance(state &s);
 
 void analyze(const state &s);
 
+bool cycle_check(state &s);
+
 void finalize(const state &s);
 
 } // namespace heat

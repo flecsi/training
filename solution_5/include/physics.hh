@@ -1,9 +1,20 @@
 #ifndef HEAT_PHYSICS_HH
 #define HEAT_PHYSICS_HH
 
-#include "spec/control.hh"
+#include "include/state.hh"
 
 namespace heat::physics {
+
+struct pair_sum {
+  using pair = std::pair<double, double>;
+  static pair combine(pair p1, pair p2) {
+    p1.first += p2.first;
+    p1.second += p2.second;
+    return p1;
+  }
+  template<typename>
+  static constexpr pair identity = std::make_pair(0, 0);
+};
 
 void initialize(flecsi::exec::accelerator,
   mesh::accessor<flecsi::ro> m,

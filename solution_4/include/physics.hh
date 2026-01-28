@@ -1,27 +1,35 @@
 #ifndef HEAT_PHYSICS_HH
 #define HEAT_PHYSICS_HH
 
-#include "spec/control.hh"
+#include "include/state.hh"
 
 namespace heat::physics {
 
-void initialize(flecsi::exec::cpu,
-  mesh::accessor<flecsi::ro> m,
+struct pair_sum {
+  using pair = std::pair<double, double>;
+  static pair combine(pair p1, pair p2) {
+    p1.first += p2.first;
+    p1.second += p2.second;
+    return p1;
+  }
+  template<typename>
+  static constexpr pair identity = std::make_pair(0, 0);
+};
+
+void initialize(mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::wo, flecsi::na> u_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::wo> prg_a,
   const gaussianIC &ic) noexcept;
 
-void initialize_rhs(flecsi::exec::cpu,
-  mesh::accessor<flecsi::ro> m,
+void initialize_rhs(mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::wo, flecsi::na> rhs_a,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::na> u_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::ro> prg_a,
   const state::params &p) noexcept;
 
-void apply_dirichlet(flecsi::exec::cpu,
-  mesh::accessor<flecsi::ro> m,
+void apply_dirichlet(mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::rw, flecsi::na> u_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::ro> prg_a,
@@ -38,8 +46,7 @@ red_black_range(mesh::accessor<flecsi::ro> m, const int &j) {
 
 template<bool RED>
 inline double
-red_black(flecsi::exec::cpu,
-  mesh::accessor<flecsi::ro> m,
+red_black(mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::rw, flecsi::rw> u_a,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::ro> rhs_a,
   const state::params &p) noexcept {
@@ -85,16 +92,14 @@ double analytical_gaussian(double x,
   double yc,
   double beta);
 
-std::pair<double, double> compute_error(flecsi::exec::cpu,
-  mesh::accessor<flecsi::ro> m,
+std::pair<double, double> compute_error(mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::rw, flecsi::rw> u_a,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::ro> rhs_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::ro> prg_a,
   const state::params &p) noexcept;
 
-double residual(flecsi::exec::cpu,
-  mesh::accessor<flecsi::ro> m,
+double residual(mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::rw, flecsi::rw> u_a,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::ro> rhs_a,
   const state::params &p) noexcept;

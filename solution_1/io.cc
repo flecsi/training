@@ -1,6 +1,5 @@
 #include "include/io.hh"
 #include <algorithm>
-#include <flecsi/execution.hh>
 #include <flecsi/flog.hh>
 #include <fstream>
 #include <iomanip>
@@ -39,7 +38,6 @@ print_diag(const state &s) {
   flog(info) << "step " << s.cur.prg.step << "  t=" << std::fixed
              << std::setprecision(6) << s.cur.prg.t << "  u[min,max]=["
              << std::setprecision(6) << umin << ", " << umax << "]" << '\n';
-  flecsi::flog::flush();
 }
 
 void

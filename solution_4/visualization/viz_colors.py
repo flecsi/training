@@ -7,6 +7,7 @@ import glob
 import os
 import re
 import numpy as np
+import sys
 
 import matplotlib
 matplotlib.use("Agg")
@@ -84,7 +85,6 @@ def save_frames_multi():
         im.set_data(U)
         ax.set_title(f"u_{it} (ranks: {len(ps)})")
         fig.savefig(f"frames_multi/u_{it}.png", dpi=150, bbox_inches="tight")
-        fig.clf()
 
     plt.close(fig)
 

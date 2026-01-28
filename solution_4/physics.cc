@@ -5,13 +5,12 @@
 namespace heat::physics {
 
 void
-initialize(flecsi::exec::cpu,
-  mesh::accessor<flecsi::ro> m,
+initialize(mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::wo, flecsi::na> u_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::wo> prg_a,
   const gaussianIC &ic) noexcept {
-  *prg_a = {0., 0};
+  prg_a = {0., 0};
   auto u = m.mdspan<mesh::vertices>(u_a);
   for(auto j : m.axis<mesh::y_axis>().layout.logical()) {
     const double y = m.value<mesh::y_axis>(j);
@@ -23,8 +22,7 @@ initialize(flecsi::exec::cpu,
 }
 
 void
-initialize_rhs(flecsi::exec::cpu,
-  mesh::accessor<flecsi::ro> m,
+initialize_rhs(mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::wo, flecsi::na> rhs_a,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::na> u_a,
   flecsi::field<state::current::progress,
@@ -44,8 +42,7 @@ initialize_rhs(flecsi::exec::cpu,
 
 // Apply Dirichlet boundary values to a target field
 void
-apply_dirichlet(flecsi::exec::cpu,
-  mesh::accessor<flecsi::ro> m,
+apply_dirichlet(mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::rw, flecsi::na> u_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::ro> prg_a,
@@ -83,8 +80,7 @@ analytical_gaussian(double x,
 }
 
 std::pair<double, double>
-compute_error(flecsi::exec::cpu,
-  mesh::accessor<flecsi::ro> m,
+compute_error(mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::rw, flecsi::rw> u_a,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::ro> rhs_a,
   flecsi::field<state::current::progress,
@@ -111,8 +107,7 @@ compute_error(flecsi::exec::cpu,
 }
 
 double
-residual(flecsi::exec::cpu,
-  mesh::accessor<flecsi::ro> m,
+residual(mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::rw, flecsi::rw> u_a,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::ro> rhs_a,
   const state::params &p) noexcept {

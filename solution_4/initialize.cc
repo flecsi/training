@@ -1,10 +1,10 @@
-#include "include/heat.hh"
 #include "include/io.hh"
 #include "include/physics.hh"
+#include "spec/control.hh"
 
 namespace heat {
 
-void
+static void
 initialize(spec::control_policy &cp) {
 
   auto &s = cp.state();
@@ -15,12 +15,12 @@ initialize(spec::control_policy &cp) {
   gaussianIC ic{0.5 * s.par.Lx, 0.5 * s.par.Ly, 200.0};
 
   sc.execute<physics::initialize>(
-    flecsi::exec::on, *s.cur.m, s.cur.u(*s.cur.m), s.cur.prg(*s.cur.idx), ic);
+    *s.cur.m, s.cur.u(*s.cur.m), s.cur.prg(*s.cur.idx), ic);
 
   io::output_print(s, sc, "u_");
 }
 
 } // namespace heat
 
-inline control::action<heat::initialize, spec::cp::initialize>
+const spec::control::action<heat::initialize, spec::cp::initialize>
   initialize_action;
