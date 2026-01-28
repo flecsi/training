@@ -1,7 +1,7 @@
 #ifndef HEAT_PHYSICS_HH
 #define HEAT_PHYSICS_HH
 
-#include "spec/control.hh"
+#include "include/state.hh"
 
 namespace heat::physics {
 
