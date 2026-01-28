@@ -39,7 +39,10 @@ struct control_policy : flecsi::run::control_base {
   }
 
   static bool cycle_control(control_policy &cp) {
-#ifndef VERSION3
+#ifdef VERSION3
+    return false;
+#else
+    // edit here
 #endif
   }
 
@@ -51,8 +54,8 @@ private:
   heat::state state_;
 }; // struct control_policy
 
-} // namespace spec
-
 using control = flecsi::run::control<spec::control_policy>;
+
+} // namespace spec
 
 #endif // CONTROL_HH
