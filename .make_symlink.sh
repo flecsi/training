@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-solutions=(solution_1 solution_2 solution_3 solution_4 solution_5)
+# Process both directories automatically
 
 relpath() {
   python3 - <<'EOF' "$1" "$2"
@@ -10,22 +10,40 @@ print(os.path.relpath(sys.argv[1], sys.argv[2]))
 EOF
 }
 
-for ((i=1; i<${#solutions[@]}; i++)); do
-  prev=3_hours/"${solutions[i-1]}"
-  curr=3_hours/"${solutions[i]}"
+symlink_duplicates() {
+  local source_dir="$1"
+  local target_dir="$2"
 
-  find "$curr" -type f -print0 | while IFS= read -r -d '' file; do
-    rel="${file#$curr/}"
-    prev_file="$prev/$rel"
+  find "$source_dir" -type f -print0 | while IFS= read -r -d '' file; do
+    rel="${file#$source_dir/}"
+    target_file="$target_dir/$rel"
 
-    [[ -f "$prev_file" ]] || continue
+    [[ -f "$target_file" ]] || continue
 
-    if diff -q "$file" "$prev_file" >/dev/null; then
+    if diff -q "$file" "$target_file" >/dev/null; then
       file_dir="$(dirname "$file")"
-      target="$(relpath "$prev_file" "$file_dir")"
+      target="$(relpath "$target_file" "$file_dir")"
       rm -f "$file"
       ln -s "$target" "$file"
       echo "symlinked: $file -> $target"
     fi
   done
-done
+}
+
+# Process solution directory (top level)
+if [[ -d "solution" ]]; then
+  cd solution
+  solutions=(runtime control_model data_model distributed onnode_parallelism)
+
+  # Symlink between consecutive solution directories
+  for i in {1..4}; do
+    symlink_duplicates "${solutions[$i]}" "${solutions[$((i-1))]}"
+  done
+  cd ..
+fi
+
+# Process 2_hours directory
+cd 2_hours
+symlink_duplicates "exercise_1" "../solution/distributed"
+symlink_duplicates "exercise_2" "exercise_1"
+symlink_duplicates "exercise_2" "../solution/distributed"
