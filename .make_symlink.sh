@@ -11,8 +11,8 @@ EOF
 }
 
 for ((i=1; i<${#solutions[@]}; i++)); do
-  prev="${solutions[i-1]}"
-  curr="${solutions[i]}"
+  prev=3_hours/"${solutions[i-1]}"
+  curr=3_hours/"${solutions[i]}"
 
   find "$curr" -type f -print0 | while IFS= read -r -d '' file; do
     rel="${file#$curr/}"

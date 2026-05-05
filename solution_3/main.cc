@@ -1,1 +1,0 @@
-../solution_2/main.cc

@@ -8,7 +8,7 @@ The code is written for clarity and instructional value.
 
 ---
 
-## Repository Layout
+## `3_hours` directory Layout
 
 ```
 provided/
