@@ -5,9 +5,9 @@
 namespace heat {
 
 static void
-initialize(spec::control_policy &cp) {
+initialize(spec::control_policy & cp) {
 
-  auto &s = cp.state();
+  auto & s = cp.state();
   allocate(s);
 
   gaussianIC ic{0.5 * s.par.Lx, 0.5 * s.par.Ly, 200.0};

@@ -5,11 +5,11 @@
 
 namespace heat::physics {
 
-void initialize(state &s, const gaussianIC &ic);
+void initialize(state & s, const gaussianIC & ic);
 
-void initialize_rhs(state &s);
+void initialize_rhs(state & s);
 
-void apply_dirichlet(state &s);
+void apply_dirichlet(state & s);
 
 template<bool RED>
 auto
@@ -19,7 +19,7 @@ red_black_range(int j) {
 
 template<bool RED>
 double
-red_black(state &s) {
+red_black(state & s) {
   double max_change = 0.0;
 
   const double cdx2 = 1.0 / (s.par.dx() * s.par.dx());
@@ -62,9 +62,9 @@ double analytical_gaussian(double x,
   double yc,
   double beta);
 
-double compute_error(const state &s, double xc, double yc);
+double compute_error(const state & s, double xc, double yc);
 
-double residual(state &s);
+double residual(state & s);
 
 } // namespace heat::physics
 

@@ -7,7 +7,7 @@
 namespace heat {
 
 void
-finalize(const state &s) {
+finalize(const state & s) {
 
   double err = physics::compute_error(s, 0.5 * s.par.Lx, 0.5 * s.par.Ly);
   flog(info) << "t=" << s.cur.prg.t << "  relative L2 error=" << err << '\n';

@@ -93,7 +93,7 @@ struct state {
 };
 
 inline void
-allocate(state &s) {
+allocate(state & s) {
   const std::size_t N = s.cur.m.Nx * s.cur.m.Ny;
   // We do not rely on the initialization to 0
   s.cur.u.resize(N);

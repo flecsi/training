@@ -5,10 +5,10 @@
 namespace heat {
 
 static void
-initialize(spec::control_policy &cp) {
+initialize(spec::control_policy & cp) {
 
-  auto &s = cp.state();
-  auto &sc = cp.scheduler();
+  auto & s = cp.state();
+  auto & sc = cp.scheduler();
 
   allocate(s, sc);
 

@@ -81,7 +81,7 @@ struct state {
 };
 
 inline void
-allocate(state &s, flecsi::scheduler &sc) {
+allocate(state & s, flecsi::scheduler & sc) {
   sc.allocate(s.cur.idx, sc.runtime().processes());
 
   mesh::gcoord axis_extents{s.par.Nx, s.par.Ny};

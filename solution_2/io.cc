@@ -10,7 +10,7 @@
 namespace heat::io {
 
 void
-write_csv(const state &s, const std::string &fname) {
+write_csv(const state & s, const std::string & fname) {
   std::ofstream file(fname);
   if(!file.is_open()) {
     flog_fatal("Error: cannot open file for writing: " << fname << '\n');
@@ -31,7 +31,7 @@ write_csv(const state &s, const std::string &fname) {
 }
 
 void
-print_diag(const state &s) {
+print_diag(const state & s) {
   auto mm = std::minmax_element(s.cur.u.begin(), s.cur.u.end());
   const double umin = (mm.first != s.cur.u.end()) ? *mm.first : 0.0;
   const double umax = (mm.second != s.cur.u.end()) ? *mm.second : 0.0;
@@ -42,7 +42,7 @@ print_diag(const state &s) {
 }
 
 void
-output_print(const state &s, std::string prefix) {
+output_print(const state & s, std::string prefix) {
   std::ostringstream oss;
   oss << prefix << std::setw(6) << std::setfill('0') << s.cur.prg.step
       << ".csv";

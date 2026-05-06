@@ -10,7 +10,7 @@ initialize(flecsi::exec::accelerator s,
   flecsi::field<double>::accessor<flecsi::wo, flecsi::na> u_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::wo> prg_a,
-  const gaussianIC &ic) noexcept {
+  const gaussianIC & ic) noexcept {
   prg_a = {0., 0};
   auto u = m.mdspan<mesh::vertices>(u_a);
   s.executor()
@@ -31,7 +31,7 @@ initialize_rhs(flecsi::exec::accelerator s,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::na> u_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::ro> prg_a,
-  const state::params &p) noexcept {
+  const state::params & p) noexcept {
   auto u = m.mdspan<mesh::vertices>(u_a);
   auto rhs = m.mdspan<mesh::vertices>(rhs_a);
   // Build RHS b = u^n + dt * s(x,y,t^{n+1})
@@ -53,9 +53,9 @@ apply_dirichlet(flecsi::exec::accelerator s,
   flecsi::field<double>::accessor<flecsi::rw, flecsi::na> u_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::ro> prg_a,
-  const boundary &bc) noexcept {
+  const boundary & bc) noexcept {
   auto u = m.mdspan<mesh::vertices>(u_a);
-  const auto &t = prg_a->t;
+  const auto & t = prg_a->t;
   s.executor()
     .named("apply_dirichlet")
     .forall(j, m.axis<mesh::y_axis>().layout.logical()) {
@@ -95,8 +95,8 @@ compute_error(flecsi::exec::accelerator s,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::ro> rhs_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::ro> prg_a,
-  const state::params &p) noexcept {
-  const auto &t = prg_a->t;
+  const state::params & p) noexcept {
+  const auto & t = prg_a->t;
   auto u = m.mdspan<mesh::vertices>(u_a);
 
   const double xc = p.Lx / 2;
@@ -123,7 +123,7 @@ residual(flecsi::exec::accelerator s,
   mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::rw, flecsi::rw> u_a,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::ro> rhs_a,
-  const state::params &p) noexcept {
+  const state::params & p) noexcept {
 
   auto u = m.mdspan<mesh::vertices>(u_a);
   auto rhs = m.mdspan<mesh::vertices>(rhs_a);

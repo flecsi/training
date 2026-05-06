@@ -7,10 +7,10 @@
 namespace heat {
 
 void
-finalize(spec::control_policy &cp) {
+finalize(spec::control_policy & cp) {
 
-  auto &s = cp.state();
-  auto &sc = cp.scheduler();
+  auto & s = cp.state();
+  auto & sc = cp.scheduler();
 
   auto err =
     sc.reduce<physics::compute_error, physics::pair_sum>(flecsi::exec::on,

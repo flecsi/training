@@ -5,14 +5,14 @@
 namespace heat::physics {
 
 void
-initialize(state &s, const gaussianIC &ic) {
+initialize(state & s, const gaussianIC & ic) {
   for(int j = 0; j < s.cur.m.Ny; ++j)
     for(int i = 0; i < s.cur.m.Nx; ++i)
       s.cur.u[s.cur.m.idx(i, j)] = ic(i * s.par.dx(), j * s.par.dy());
 }
 
 void
-initialize_rhs(state &s) {
+initialize_rhs(state & s) {
   // Build RHS b = u^n + dt * s(x,y,t^{n+1})
   for(int j = 0; j < s.cur.m.Ny; ++j) {
     for(int i = 0; i < s.cur.m.Nx; ++i) {
@@ -26,7 +26,7 @@ initialize_rhs(state &s) {
 
 // Apply Dirichlet boundary values to a target field
 void
-apply_dirichlet(state &s) {
+apply_dirichlet(state & s) {
   for(int j = 0; j < s.cur.m.Ny; ++j) {
     const double y = j * s.par.dy();
     s.cur.u[s.cur.m.idx(0, j)] = s.par.b.left(y, s.cur.prg.t);
@@ -54,7 +54,7 @@ analytical_gaussian(double x,
 }
 
 double
-compute_error(const state &s, double xc, double yc) {
+compute_error(const state & s, double xc, double yc) {
   const double alpha = s.par.alpha;
   double err2 = 0.0, ref2 = 0.0;
 
@@ -72,7 +72,7 @@ compute_error(const state &s, double xc, double yc) {
 }
 
 double
-residual(state &s) {
+residual(state & s) {
   double rmax = 0.0;
 
   const double cdx2 = 1.0 / (s.par.dx() * s.par.dx());

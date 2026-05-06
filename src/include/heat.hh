@@ -5,15 +5,15 @@
 
 namespace heat {
 
-void initialize(state &s);
+void initialize(state & s);
 
-void advance(state &s);
+void advance(state & s);
 
-void analyze(const state &s);
+void analyze(const state & s);
 
-bool cycle_check(state &s);
+bool cycle_check(state & s);
 
-void finalize(const state &s);
+void finalize(const state & s);
 
 } // namespace heat
 

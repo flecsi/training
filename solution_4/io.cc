@@ -15,7 +15,7 @@ write_csv(flecsi::exec::cpu s,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::na> u_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::ro> prg_a,
-  const std::string &prefix) noexcept {
+  const std::string & prefix) noexcept {
 
   std::ostringstream oss;
   oss << prefix << std::setw(6) << std::setfill('0') << prg_a->step << '_'
@@ -65,7 +65,7 @@ print_diag(flecsi::field<double>::accessor<flecsi::ro, flecsi::na> u_a,
 }
 
 void
-output_print(state &s, flecsi::scheduler &sc, std::string prefix) {
+output_print(state & s, flecsi::scheduler & sc, std::string prefix) {
 
   sc.execute<write_csv>(flecsi::exec::on,
     *s.cur.m,

@@ -5,7 +5,7 @@
 namespace heat {
 
 void
-initialize(state &s) {
+initialize(state & s) {
 
   allocate(s);
 

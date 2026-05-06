@@ -5,7 +5,7 @@
 using namespace heat;
 
 int
-simulation(const char *f) {
+simulation(const char * f) {
   state s(io::read_file(f));
 
   initialize(s);

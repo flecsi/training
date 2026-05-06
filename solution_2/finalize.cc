@@ -7,9 +7,9 @@
 namespace heat {
 
 void
-finalize(spec::control_policy &cp) {
+finalize(spec::control_policy & cp) {
 
-  const auto &s = cp.state();
+  const auto & s = cp.state();
 
   double err = physics::compute_error(s, 0.5 * s.par.Lx, 0.5 * s.par.Ly);
   flog(info) << "t=" << s.cur.prg.t << "  relative L2 error=" << err << '\n';

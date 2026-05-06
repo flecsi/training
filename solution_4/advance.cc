@@ -2,7 +2,7 @@
 #include "spec/control.hh"
 
 bool
-spec::cycle_check(heat::state &s, flecsi::scheduler &sc) {
+spec::cycle_check(heat::state & s, flecsi::scheduler & sc) {
   return sc
     .reduce<spec::control_policy::update_dt, flecsi::exec::fold::sum>(
       s.cur.prg(*s.cur.idx), s.par)
@@ -15,17 +15,17 @@ static bool
 check_loop(flecsi::future<double> mr,
   flecsi::future<double> mb,
   flecsi::future<double> res,
-  const state::params &p) noexcept {
+  const state::params & p) noexcept {
   return !((std::max(mb.get(), mr.get()) < p.implicit_tol) &&
            (res.get() < p.residue_tol));
 }
 
 static void
-advance(spec::control_policy &cp) {
+advance(spec::control_policy & cp) {
 
   using namespace physics;
-  auto &s = cp.state();
-  auto &sc = cp.scheduler();
+  auto & s = cp.state();
+  auto & sc = cp.scheduler();
 
   sc.execute<physics::apply_dirichlet>(
     *s.cur.m, s.cur.u(*s.cur.m), s.cur.prg(*s.cur.idx), s.par.b);

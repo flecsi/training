@@ -6,11 +6,11 @@
 
 namespace heat::io {
 
-void write_csv(const state &s, const std::string &fname);
+void write_csv(const state & s, const std::string & fname);
 
-void print_diag(const state &s);
+void print_diag(const state & s);
 
-void output_print(const state &s, std::string prefix);
+void output_print(const state & s, std::string prefix);
 
 inline state::params
 read_file(const char *) {

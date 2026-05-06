@@ -10,7 +10,7 @@
 
 namespace spec {
 
-bool cycle_check(heat::state &s);
+bool cycle_check(heat::state & s);
 
 /// Control Points.
 enum class cp { initialize, advance, analyze, finalize };
@@ -34,13 +34,13 @@ struct control_policy : flecsi::run::control_base {
 
   using control_points_enum = cp;
 
-  control_policy(const char *c) : state_(heat::io::read_file(c)) {}
+  control_policy(const char * c) : state_(heat::io::read_file(c)) {}
 
-  heat::state &state() {
+  heat::state & state() {
     return state_;
   }
 
-  static bool cycle_control(control_policy &cp) {
+  static bool cycle_control(control_policy & cp) {
     return cycle_check(cp.state());
   }
 

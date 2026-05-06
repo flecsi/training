@@ -21,7 +21,7 @@ void initialize(flecsi::exec::accelerator,
   flecsi::field<double>::accessor<flecsi::wo, flecsi::na> u_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::wo> prg_a,
-  const gaussianIC &ic) noexcept;
+  const gaussianIC & ic) noexcept;
 
 void initialize_rhs(flecsi::exec::accelerator,
   mesh::accessor<flecsi::ro> m,
@@ -29,18 +29,18 @@ void initialize_rhs(flecsi::exec::accelerator,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::na> u_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::ro> prg_a,
-  const state::params &p) noexcept;
+  const state::params & p) noexcept;
 
 void apply_dirichlet(flecsi::exec::accelerator,
   mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::rw, flecsi::na> u_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::ro> prg_a,
-  const boundary &bc) noexcept;
+  const boundary & bc) noexcept;
 
 template<bool RED>
 auto
-red_black_range(mesh::accessor<flecsi::ro> m, const int &j) {
+red_black_range(mesh::accessor<flecsi::ro> m, const int & j) {
   if constexpr(RED)
     return m.red<mesh::x_axis>(j);
   else
@@ -53,7 +53,7 @@ red_black(flecsi::exec::accelerator s,
   mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::rw, flecsi::rw> u_a,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::ro> rhs_a,
-  const state::params &p) noexcept {
+  const state::params & p) noexcept {
 
   auto u = m.mdspan<mesh::vertices>(u_a);
   auto rhs = m.mdspan<mesh::vertices>(rhs_a);
@@ -99,13 +99,13 @@ std::pair<double, double> compute_error(flecsi::exec::accelerator,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::ro> rhs_a,
   flecsi::field<state::current::progress,
     flecsi::data::single>::accessor<flecsi::ro> prg_a,
-  const state::params &p) noexcept;
+  const state::params & p) noexcept;
 
 double residual(flecsi::exec::accelerator,
   mesh::accessor<flecsi::ro> m,
   flecsi::field<double>::accessor<flecsi::rw, flecsi::rw> u_a,
   flecsi::field<double>::accessor<flecsi::ro, flecsi::ro> rhs_a,
-  const state::params &p) noexcept;
+  const state::params & p) noexcept;
 
 } // namespace heat::physics
 
