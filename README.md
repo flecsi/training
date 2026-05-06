@@ -8,7 +8,7 @@ The code is written for clarity and instructional value.
 
 ---
 
-## Repository Layout
+## `3_hours` directory Layout
 
 ```
 provided/
@@ -32,6 +32,42 @@ solution_5/
   Reference solutions corresponding to the end of each module.  
   `solution_1` matches Module 1, `solution_2` matches Module 2, etc.  
   Each solution builds independently and reflects the expected code state for that module.
+
+---
+
+## `2_hours` directory Layout
+
+This condensed version of the training focuses on two key FleCSI concepts through two hands-on exercises.
+Participants work in the `exercise_1/` and `exercise_2/` directories.
+A complete reference solution is available in `solution/`.
+
+```
+exercise_1/        Exercise 1 working directory: add fields and convert functions to FleCSI tasks
+exercise_2/        Exercise 2 working directory: add parallel portability
+solution/          Complete reference solution
+```
+
+### Exercise 1:  Write FleCSI Tasks
+
+**Directory:** `exercise_1/`
+
+**Concept:** Wrapping plain C++ functions as FleCSI tasks so they can be
+scheduled and executed by the FleCSI runtime across distributed memory.
+
+**Your task:** Implement the bodies of two functions in `exercise_1/`:
+
+Look for `// Exercise 1` comments in `physics.cc` and `include/physics.hh`.
+
+### Exercise 2: Add Portability via `flecsi::exec::accelerator`
+
+**Directory:** `exercise_2/`
+
+**Concept:** Making FleCSI tasks portable for parallel computing by using
+`flecsi::exec::accelerator` and the `s.executor()` API instead of plain loops.
+
+**Your task:** Modify different places in `exercise_2/` in the file `physics.cc`.
+
+Look for `// Exercise 2` comments.
 
 ---
 
